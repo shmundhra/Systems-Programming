@@ -1,6 +1,6 @@
-#Simulation of Virtual Memory using Demand Paging
+# Simulation of Virtual Memory using Demand Paging
 
-##Overview
+## Overview
 In this folder, we attempt to simulate the demand paging paradigm to allocate page frames to the page demands of different processes. We use **Proportional Frame Allocation** to partition the memory and the **Locally - Least Recently Used** Page Replacement Algorithm, along with the use of a Transition Lookahead Buffer (TLB) to handle the page demands of a process.  
 
 **Proportional Frame Allocation**  
@@ -11,35 +11,35 @@ This is a Page Replacement Algorithm which comes into action when we hit a Page 
 
 The implementation is broken up into four different modules which communicate to each other using XSI-IPC Message Queues, and access some Shared Memory for the different data structures required; keys of which are shared through Command Line Arguments.
 
-##Master Module 
+## Master Module 
 The Master Module is like the main module of the simulation, which is the starting and the ending point of the whole program.
 It is responsible for the creation of the other three modules: **Scheduler**, **MMU**, and the **Processes**. Before that, it creates and dynamically allocates memory to the Shared Memory and Message Queues using unique Keys.
 
-###Shared Memory segment 1 (SM1)   
+### Shared Memory segment 1 (SM1)   
 It contains the Page Tables for each process.  
 There are **'k' Page Tables**, one for each process.  
 **Process#i** page table consists of **m#i fields**, each field corresponds to a page of the process.   
 **Page#j** field consists of (frame number, validity bit) which stores which frame it was last assigned to, and whether that frame still holds it or not. 
 
-###Shared Memory segment 2 (SM2)  
+### Shared Memory segment 2 (SM2)  
 It contains the Free-Frame list of the Main Memory.  
 
-###Shared Memory segment 3 (SM3)  
+### Shared Memory segment 3 (SM3)  
 It contains the details of each process.   
 There is an array of **( pid\_t, p\_index )** sorted by the *pid_t* to allow a quick lookup mapping *Process_Id* to *Process_Index*.     
 There is another array indexed by the *Process_Indices* which has one field corresponding to details of each process - **( pid\_t, No. of Pages, Allocated Frames )**
 
-###Message Queue 1 (MQ1)  
+### Message Queue 1 (MQ1)  
 is shared between the **Master** and the **Scheduler Module**, and acts as the _Ready-Queue_, with the **Master** creating processes at regular intervals and sends them for scheduling through the _Ready-Queue_ to the **Scheduler**.
 >	**Type-1 Message** :: New Process added to *Ready-Queue* by **Master** to be scheduled by **Scheduler**.  
 >	**Type-2 Message** :: Process Termination ACK to **Master** by **Scheduler**.
 
-###Message Queue 2 (MQ2)  
+### Message Queue 2 (MQ2)  
 is shared between the **Scheduler** and the **MMU Module**, and acts as the _Status-Queue_, with the **MMU** processing the page demands from the Processes and sending the status through the _Status-Queue_ to the **Scheduler**.  
 >	**Type-1 Message** :: Process Terminated  
 >	**Type-2 Message** :: Page-Fault Handled
 
-###Message Queue 3 (MQ3)  
+### Message Queue 3 (MQ3)  
 is shared between the **MMU** and the **Processes**, and acts as the _Request-Queue_. At an instant only one process can request for a page, and its process_id can be exracted by the **MMU** from the *msqid\_ds.msg\_lspid*, and other information can be taken from **MQ3**.
 
 A **Process** parses the page numbers from the Reference String and sends the request through the _Request-Queue_ to the **MMU**.  
@@ -51,14 +51,14 @@ The **MMU** then finds the apt frame to be allocated after processing the _TLB_,
 >	**Negative Number(-1)**  :: Page-Fault Encountered  
 >	**Negative Number(-2)**	 :: Invalid Page Requested    
 
-###Control Flow
+### Control Flow
 0.  Counter-intuitively, we need to allocate No. of Pages to each Process beforehand as this distribution shall 	help us in making the Shared Memory and during Local Frame Allocation
 1.	The **Master Module** first creates these instances of the **two XSI-IPC forms** and then goes on producing 	the  **Scheduler** and the  **MMU** by *forking a child and calling exec()*.  
 2.	It then *forks a child*, and this child then starts creating *k-processes* by generating *Page Reference 		Strings*( interspaced by 250ms ).  
 	After creation of a process, the child sends the *Process_Index* to the **Scheduler** for Scheduling as a *Type-1 Message*. After *k-processes* have been created, the child terminates.  
 2.	The *parent process* continually waits for *Type-2 process termination ACKs* from the **Scheduler**. After 		receiving *k-terminations*, it kills the **Scheduler** and the  **MMU** and then terminates itself. 
 
-##Scheduler
+## Scheduler
 This Module takes care of the Process Scheduling part of the simulation.  
 After being created by the **Master Module**, it goes on to *busy-waiting* on the *Ready Queue* waiting for a process to arrive.  
 
@@ -73,7 +73,7 @@ After a *Process_Index* arrives as a Type-1 Message :
 
 It is Finally Killed by the **Master Module** during its *Busy-Wait*
 
-##MMU - Memory Management Unit
+## MMU - Memory Management Unit
 This Module takes care of the Page Requests from the various processes scheduled by the **Scheduler**, after they are created by the **Master Module**.   
 After the **Master Module** creates it, it goes on to *busy-waiting* on the *Request-Queue* waiting for a page request to arrive.   
 
@@ -92,7 +92,7 @@ After a *Page Request* arrives :
 
 It is Finally Killed by the **Master Module** during its *Busy-Wait*
 
-##Processes
+## Processes
 These are the module which simulate the execution of a process after being scheduled by the **Scheduler**.   
 Each process has a reference string and generation of page numbers by parsing the string and getting back frames can be assumed to be equivalent to the execution of a process in Main Memory.  
 After being created by the **Master Module**, it goes into wait awaiting a *signal from the Scheduler* which wakes it up and it starts executing.  
