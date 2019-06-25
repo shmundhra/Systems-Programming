@@ -368,6 +368,5 @@ int main(int argc, char *argv[])
     fprintf(stdout, "%15s:: %8.3lf\n", "HRN_ATN", HRN_ATN);
     fclose(File_Ptr);
     chdir(GoBack.c_str());
-
     exit(EXIT_SUCCESS);
 }
