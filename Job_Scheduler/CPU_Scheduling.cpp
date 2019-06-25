@@ -221,7 +221,7 @@ double RoundRobin(vector<Process_Info> Job_Queue, int N)
         }
         Curr_Time = Curr_EndTime;
     }
-    //for ( int i = 0 ; i < N ; i++ ){ fprintf(stderr , "%12s[%d]:: " , "Schedule" , i ) ; for ( auto val : Schedule[i] ) fprintf(stderr,"%6.3lf ",val); cerr<<"\n"; }
+    for ( int i = 0 ; i < N ; i++ ){ fprintf(stderr , "%12s[%d]:: " , "Schedule" , i ) ; for ( auto val : Schedule[i] ) fprintf(stderr,"%6.3lf ",val); cerr<<"\n"; }
 
     Avg_Turnaround = Turnaround / N; //debug1(Avg_Turnaround) ;
     return Avg_Turnaround;
@@ -322,7 +322,7 @@ int main(int argc, char *argv[])
 
     /*Save data in file */
 
-    if (chdir(InputDirectory.c_str()) < 0)
+    /*if (chdir(InputDirectory.c_str()) < 0)
     {
         mkdir(InputDirectory.c_str(), 0666);
         chdir(InputDirectory.c_str());
@@ -337,8 +337,8 @@ int main(int argc, char *argv[])
     }
     fclose(File_Ptr);
     chdir(GoBack.c_str());
-
-    //debugI(Process_Id) ; debug(Arrival_Time) ; debug(CPU_Burst) ;
+*/
+    debugI(Process_Id) ; debug(Arrival_Time) ; debug(CPU_Burst) ;
 
     /*Push Jobs in Queue */
     for (int i = 0; i < N; i++)
@@ -346,15 +346,15 @@ int main(int argc, char *argv[])
         Job_Queue.push_back({Arrival_Time[i], CPU_Burst[i]});
     }
 
-    FCFS_ATN = FCFS(Job_Queue, N);
-    NPE_SJF_ATN = NonPreEmptive_SJF(Job_Queue, N);
-    PE_SJF_ATN = PreEmptive_SJF(Job_Queue, N);
+    //FCFS_ATN = FCFS(Job_Queue, N);
+    //NPE_SJF_ATN = NonPreEmptive_SJF(Job_Queue, N);
+    //PE_SJF_ATN = PreEmptive_SJF(Job_Queue, N);
     RR_ATN = RoundRobin(Job_Queue, N);
-    HRN_ATN = Highest_RespRatio(Job_Queue, N);
+    //HRN_ATN = Highest_RespRatio(Job_Queue, N);
 
     cout << FCFS_ATN << " " << NPE_SJF_ATN << " " << PE_SJF_ATN << " " << RR_ATN << " " << HRN_ATN << " ";
 
-    if (chdir(ResultDirectory.c_str()) < 0)
+    /*if (chdir(ResultDirectory.c_str()) < 0)
     {
         mkdir(ResultDirectory.c_str(), 0666);
         chdir(ResultDirectory.c_str());
@@ -368,6 +368,6 @@ int main(int argc, char *argv[])
     fprintf(stdout, "%15s:: %8.3lf\n", "HRN_ATN", HRN_ATN);
     fclose(File_Ptr);
     chdir(GoBack.c_str());
-
+*/
     exit(EXIT_SUCCESS);
 }
