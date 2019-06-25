@@ -1,4 +1,4 @@
-# A Brief Guide to SHM_SHELL: The Simple Command Line Interpreter
+# SHM_SHELL: The Simple Command Line Interpreter
 
 ## Functionalities
 
