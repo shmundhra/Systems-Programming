@@ -8,8 +8,8 @@
 	chunkTOthread.py      - Converts output folder of (1) into an output folder of (2)
 	threadTOchunk.py      - Converts output folder of (2) into an output folder of (1) **
 	
-	plot_TimeVsChunk	  - Creates Execution Time vs ChunkSize keeping NumThreads Fixed for each Matrix
-	plot_TimeVsThreads	  - Creates Execution Time vs NumThreads keeping ChunkSize Fixed for each Matrix
+	plot_TimeVsChunk      - Creates Execution Time vs ChunkSize keeping NumThreads Fixed for each Matrix
+	plot_TimeVsThreads    - Creates Execution Time vs NumThreads keeping ChunkSize Fixed for each Matrix
 
 	plot_MinExecVsChunk   - Creates Minimum Execution Time over all NumThreads vs Chunksize for each Matrix
 	plot_MinExecVsThreads - Creates Minimum Execution Time over all Chunksize vs NumThreads for each Matrix
@@ -20,7 +20,7 @@
 	plot_SpeedupVsChunk   - Creates Speedup Factor over all NumThreads vs Chunksize for each Matrix
 	plot_SpeedupVsThreads - Creates Speedup Factor over all Chunksize vs NumThreads for each Matrix
 
-	compile_MatrixWise	  - Compiles the above generated plots MatrixWise **
+	compile_MatrixWise    - Compiles the above generated plots MatrixWise **
 
 
 ## Dependencies
@@ -35,18 +35,18 @@
 	plot_*VsThreads 	- sys.argv[1]/Threads_Matrix[1-4]/<NumThreads>.tsv	
 
 	compile_MatrixWise	- sys.argv[1]/Chunk_Matrix[1-4]/<ChunkSize>.tsv
-						- sys.argv[1]/Threads_Matrix[1-4]/<NumThreads>.tsv	
+				- sys.argv[1]/Threads_Matrix[1-4]/<NumThreads>.tsv	
 
 ## Output
 
 	create_ChunkWise    	- Sampling<sys.argv[1]>/Chunk_Matrix[1-4]/<ChunkSize>.tsv
-	create_ThreadWise	    - Sampling<sys.argv[1]>/Threads_Matrix[1-4]/<NumThreads>.tsv
+	create_ThreadWise	- Sampling<sys.argv[1]>/Threads_Matrix[1-4]/<NumThreads>.tsv
 	
-	chunkTOthread 			- Sampling<sys.argv[1]>/Threads_Matrix[1-4]/<NumThreads>.tsv
-	threadTOchunk 			- Sampling<sys.argv[1]>/Chunk_Matrix[1-4]/<ChunkSize>.tsv
+	chunkTOthread 		- Sampling<sys.argv[1]>/Threads_Matrix[1-4]/<NumThreads>.tsv
+	threadTOchunk 		- Sampling<sys.argv[1]>/Chunk_Matrix[1-4]/<ChunkSize>.tsv
 
-	plot_TimeVsChunk	  	- sys.argv[1]/TimeVsChunk/<NumThreads>.jpg
-	plot_TimeVsThreads	 	- sys.argv[1]/TimeVsThreads/<ChunkSize>.jpg
+	plot_TimeVsChunk	- sys.argv[1]/TimeVsChunk/<NumThreads>.jpg
+	plot_TimeVsThreads	- sys.argv[1]/TimeVsThreads/<ChunkSize>.jpg
 
 	plot_MinExecVsChunk   	- sys.argv[1]/MinExecVsChunk/Matrix[1-4].jpg
 	plot_MinExecVsThreads 	- sys.argv[1]/MinExecVsThreads/Matrix[1-4].jpg
@@ -57,7 +57,7 @@
 	plot_SpeedupVsChunk   	- sys.argv[1]/SpeedupVsChunk/Matrix[1-4].jpg
 	plot_SpeedupVsThreads 	- sys.argv[1]/SpeedupVsThreads/Matrix[1-4].jpg
 
-	compile_MatrixWise		- sys.argv[1]/Matrix[1-4].jpg
+	compile_MatrixWise	- sys.argv[1]/Matrix[1-4].jpg
 
 ## Runnable
 	
