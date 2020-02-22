@@ -222,13 +222,13 @@ int main(int argc, char* argv[])
     {
         vector<float> point = {objectpts_org[i].x, objectpts_org[i].y, objectpts_org[i].z, 1};
 
-        Translate_3DSpace(point);			// Translate to P
-        Rotate_AboutX(point);				// Rotate About X
-        Rotate_AboutY(point);				// Rotate About Y
-        Rotate_AboutZ(point);				// Rotate About Z
-        RotateInv_AboutY(point);			// Inverse Rotate About Y
-        RotateInv_AboutX(point);			// Inverse Rotate About X
-        TranslateInv_3DSpace(point);		// Inverse Translate From P
+        Translate_3DSpace(point);           // Translate to P
+        Rotate_AboutX(point);               // Rotate About X
+        Rotate_AboutY(point);               // Rotate About Y
+        Rotate_AboutZ(point);               // Rotate About Z
+        RotateInv_AboutY(point);            // Inverse Rotate About Y
+        RotateInv_AboutX(point);            // Inverse Rotate About X
+        TranslateInv_3DSpace(point);        // Inverse Translate From P
 
         // sprintf(tmp, "%.3f %.3f %.3f", point[0], point[1], point[2]);
         // sscanf(tmp, "%f %f %f", &point[0], &point[1], &point[2]);
